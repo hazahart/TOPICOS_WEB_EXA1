@@ -4,7 +4,6 @@ use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
 use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\Encoding\Encoding;
-use Exception;
 
 class QrGenerator
 {
@@ -46,19 +45,19 @@ class QrGenerator
         ];
     }
 
-    public function generateText($text, $size = 300, $ecLevel = 'M')
+    public function generarTexto($text, $size = 300, $ecLevel = 'M')
     {
         if (empty(trim($text))) throw new Exception("El texto es requerido.", 400);
         return $this->generate($text, $size, $ecLevel);
     }
 
-    public function generateUrl($url, $size = 300, $ecLevel = 'M')
+    public function generarURL($url, $size = 300, $ecLevel = 'M')
     {
         if (!filter_var($url, FILTER_VALIDATE_URL)) throw new Exception("URL no válida.", 400);
         return $this->generate($url, $size, $ecLevel);
     }
 
-    public function generateWifi($ssid, $password, $encryption = 'WPA', $size = 300, $ecLevel = 'M')
+    public function generarWifi($ssid, $password, $encryption = 'WPA', $size = 300, $ecLevel = 'M')
     {
         if (empty(trim($ssid))) throw new Exception("El SSID es requerido.", 400);
         $encryption = strtoupper($encryption);
@@ -74,7 +73,7 @@ class QrGenerator
         return $this->generate($wifiString, $size, $ecLevel);
     }
 
-    public function generateGeo($lat, $lon, $size = 300, $ecLevel = 'M')
+    public function generarGeo($lat, $lon, $size = 300, $ecLevel = 'M')
     {
         if (!is_numeric($lat) || $lat < -90 || $lat > 90) throw new Exception("Latitud inválida.", 400);
         if (!is_numeric($lon) || $lon < -180 || $lon > 180) throw new Exception("Longitud inválida.", 400);
